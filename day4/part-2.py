@@ -45,27 +45,15 @@
 
 # print(len(processed))
 
-# Read input
 lines = []
 with open("input.txt", "r") as f:
     lines = f.readlines()
 
 
 def get_matches(line):
-    need = set(
-        map(
-            lambda x: int(x) if x != "" else x,
-            line.split(" | ")[0].split(": ")[1].strip().split(" "),
-        )
-    )
-    have = set(
-        map(
-            lambda x: int(x) if x != "" else x,
-            set(line.split(" | ")[1].strip().split(" ")),
-        )
-    )
-    need.discard("")
-    have.discard("")
+    need, have = line.split(" | ")
+    need = set(map(int, need.split(": ")[1].split()))
+    have = set(map(int, have.split()))
     matches = 0
     for num in need:
         if num in have:
